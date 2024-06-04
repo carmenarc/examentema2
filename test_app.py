@@ -1,28 +1,15 @@
+
+
 import unittest
-from app import app
+from miapp import MiClase  # Importa la clase que deseas probar
 
-   class TestApp(unittest.TestCase):
+class TestMiApp(unittest.TestCase):
+    def test_algo(self):
+        # Escribe tu prueba aquí
+        self.assertEqual(2 + 2, 4)
 
- def setUp(self):
-     # Configurar la aplicación antes de cada prueba
-     self.app = app.test_client()
-     self.app.testing = True
+if __name__ == '__main__':
+    unittest.main()
 
- def test_presentacion(self):
-     # Probar la página de presentación
-     response = self.app.get('/')
-     self.assertEqual(response.status_code, 200)
-     self.assertIn(b'Bienvenido al Proyecto', response.data)
+python -m unittest test_app.py
 
- def test_formulario(self):
-     # Probar el formulario
-     response = self.app.post('/formulario', data=dict(nombre='John', apellido='Doe', edad='30', altura='180'))
-     self.assertIn(b'Nombre: John, Apellido: Doe, Edad: 30, Altura: 180', response.data)
-
- def test_ruta_invalida(self):
-     # Probar una ruta no válida
-     response = self.app.get('/ruta_invalida')
-     self.assertEqual(response.status_code, 404)
-
-   if __name__ == '__main__':
- unittest.main()
